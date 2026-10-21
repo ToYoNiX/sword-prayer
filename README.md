@@ -1,6 +1,6 @@
-# calendrome-prayer
+# sword-prayer
 
-Prayer times as anchors for [Calendrome](https://github.com/ToYoNiX/calendrome).
+Prayer times as anchors for [Sword](https://github.com/ToYoNiX/sword).
 
 Provides `prayer.fajr`, `prayer.dhuhr`, `prayer.asr`, `prayer.maghrib`, and
 `prayer.isha` as anchors, so intentions can follow them:
@@ -21,13 +21,13 @@ from iqama times), so the scheduler can keep tasks out of prayer time.
 ## Install
 
 ```sh
-calendrome plugin add github.com/ToYoNiX/calendrome-prayer@<version>
+sword plugin add github.com/ToYoNiX/sword-prayer@<version>
 ```
 
 ## Status
 
-Not started. Waiting for `@calendrome/plugin-api`. See the
-[Calendrome design doc](https://github.com/ToYoNiX/calendrome/blob/main/docs/design.md),
+Not started. Waiting for `@sword/plugin-api`. See the
+[Sword design doc](https://github.com/ToYoNiX/sword/blob/main/docs/design.md),
 §8 and §16.
 
 ## License
