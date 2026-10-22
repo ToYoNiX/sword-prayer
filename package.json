@@ -1,0 +1,23 @@
+{
+  "name": "sword-prayer",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Prayer times as anchors for Sword",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "build": "esbuild src/index.ts --bundle --format=esm --platform=neutral --main-fields=module,main --outfile=main.js",
+    "test": "vitest run",
+    "typecheck": "tsc -p ."
+  },
+  "dependencies": {
+    "adhan": "^4.4.6"
+  },
+  "devDependencies": {
+    "@sword/plugin-api": "link:../sword/packages/plugin-api",
+    "@types/node": "^26.6.5",
+    "esbuild": "^0.28.2",
+    "typescript": "^7.0.2",
+    "vitest": "^5.0.5"
+  }
+}
