@@ -926,12 +926,16 @@ var plugin = {
         const start = today[prayer];
         const end = ends[prayer];
         const busyEnd = new Date(Math.min(start.getTime() + settings.busy[prayer] * 6e4, end.getTime()));
-        return { id: `prayer.${prayer}`, date, start: iso(start), end: iso(end), busy: [{ start: iso(start), end: iso(busyEnd) }], tags: ["prayer"] };
+        return { id: `prayer.${prayer}`, date, title: title(prayer, date), start: iso(start), end: iso(end), busy: [{ start: iso(start), end: iso(busyEnd) }], tags: ["prayer"] };
       });
     });
   }
 };
 var index_default = plugin;
+var TITLES = { fajr: "Fajr", dhuhr: "Dhuhr", asr: "Asr", maghrib: "Maghrib", isha: "Isha" };
+function title(prayer, date) {
+  return prayer === "dhuhr" && (/* @__PURE__ */ new Date(`${date}T12:00:00Z`)).getUTCDay() === 5 ? "Jumu'ah" : TITLES[prayer];
+}
 function duration(text) {
   const match = /^\s*(?:(\d+)h)?\s*(?:(\d+)m)?\s*$/.exec(text);
   if (!match || match[1] === void 0 && match[2] === void 0) return null;

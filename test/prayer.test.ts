@@ -31,6 +31,11 @@ describe('prayer anchors', () => {
     expect(list.every((a) => a.date === '2026-10-22' && a.tags?.join() === 'prayer')).toBe(true);
   });
 
+  it("names each prayer, and Dhuhr on a Friday Jumu'ah", () => {
+    expect(anchors(['2026-10-22']).map((a) => a.title)).toEqual(['Fajr', 'Dhuhr', 'Asr', 'Maghrib', 'Isha']);
+    expect(on(anchors(['2026-10-23']), 'prayer.dhuhr', '2026-10-23').title).toBe("Jumu'ah");
+  });
+
   it('gives each prayer a window until the next one, Fajr until sunrise and Isha until the next Fajr', () => {
     const list = anchors(['2026-10-22']);
     expect(on(list, 'prayer.fajr', '2026-10-22').end).toBe(cairoTime('2026-10-22', '07:02'));

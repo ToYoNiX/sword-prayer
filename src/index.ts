@@ -103,13 +103,20 @@ const plugin = {
         const start = today[prayer];
         const end = ends[prayer];
         const busyEnd = new Date(Math.min(start.getTime() + settings.busy[prayer] * 60_000, end.getTime()));
-        return { id: `prayer.${prayer}`, date, start: iso(start), end: iso(end), busy: [{ start: iso(start), end: iso(busyEnd) }], tags: ['prayer'] };
+        return { id: `prayer.${prayer}`, date, title: title(prayer, date), start: iso(start), end: iso(end), busy: [{ start: iso(start), end: iso(busyEnd) }], tags: ['prayer'] };
       });
     });
   },
 } satisfies Plugin<PrayerSettings>;
 
 export default plugin;
+
+const TITLES: Record<Prayer, string> = { fajr: 'Fajr', dhuhr: 'Dhuhr', asr: 'Asr', maghrib: 'Maghrib', isha: 'Isha' };
+
+/** The name shown in calendars; Dhuhr on a Friday is Jumu'ah. */
+function title(prayer: Prayer, date: string): string {
+  return prayer === 'dhuhr' && new Date(`${date}T12:00:00Z`).getUTCDay() === 5 ? "Jumu'ah" : TITLES[prayer];
+}
 
 /** "30m", "1h", "1h15m" in minutes; null if it isn't a positive duration. */
 function duration(text: string): number | null {
